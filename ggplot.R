@@ -3,7 +3,7 @@
 # Bonjour! Voici le 2e document test d'Adrien Cloutier servant aux mardis scraping.
 # Dans ce document, je tenterai de faire un ggplot, en prévision du prochain meeting.
 
-# Bonne chance!
+# Bonne chance! En effet!!!
 
 ########################################## 25 avril 2019 ##########################################
 
@@ -11,10 +11,13 @@
 
 ########## Loaded les packages nécessaires ###########
 
+
+library(tidyverse)
 library(stringr)
 library(XML) 
 library(RCurl)
 library(maps)
+
 
 ########## We load the data from the webpage into R ###########
 
@@ -22,12 +25,23 @@ famous_album <- getURL("https://fr.wikipedia.org/wiki/Liste_des_albums_musicaux_
 
 tables <- readHTMLTable(famous_album, stringsAsFactors = FALSE)
 
-########## We have a look at the names of the first few sites ###########
+########## We have a look at the data and commencer à nettoyer!  ###########
 
-top9_album <- top9_album <- tables[[2]]
-names(top9_album)
+Top9_album <- tables[[2]]
+names(Top9_album) <- Top9_album[1,]
+Top9_album <- Top9_album[-1,]
+head(Top9_album)
 
-########## Nettoyer les données ########### Un jour
+########## Nettoyer les données ########### 
+
+# Utilisation de regular expression pour supprimer tout à partir du premier "[" 
+# . pour tous les caracteres
+# * pour jusqua la fin du string
+# "" pour remplacer par rien
+Top9_album$VenteMillions <- NA
+Top9_album$VenteMillions <- gsub("[[].*","",Top9_album$`Ventes(en millions)`)
+
+
 
 
 ########## Faire un ggplot des albums les plus vendus ###########
