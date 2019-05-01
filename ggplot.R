@@ -56,7 +56,7 @@ Top9_album <- Top9_album[,-4]
 
 # Template d'un graph qui pourrait bien illustrer nos données ? 
 ggplot(Top9_album, aes(x=Album, y=VenteMillions)) + 
-  geom_bar(stat="identity", width=.5, fill="darkorange2") + 
+  geom_bar(stat="identity",alpha=0.8, width=.5, fill="darkorange2") + 
   labs(title="Albums musicaux les plus vendus", 
        caption="source: Wikipedia, Liste des albums musicaux les plus vendus, en date du 29 avril 2019.") + 
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
